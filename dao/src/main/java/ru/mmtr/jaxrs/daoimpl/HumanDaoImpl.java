@@ -1,12 +1,15 @@
-package ru.mmtr.jaxrs.dao;
+package ru.mmtr.jaxrs.daoimpl;
 
+import ru.mmtr.jaxrs.api.HumanDao;
 import ru.mmtr.jaxrs.model.Human;
 
+import javax.ejb.Local;
+import javax.enterprise.context.ApplicationScoped;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
-
+@ApplicationScoped
+@Local(HumanDao.class)
 public class HumanDaoImpl implements HumanDao {
 
     static final String JDBC_DRIVER = "org.h2.Driver";

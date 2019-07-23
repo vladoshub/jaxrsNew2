@@ -1,4 +1,4 @@
-package ru.mmtr.jaxrs.dao;
+package ru.mmtr.jaxrs.api;
 
 import ru.mmtr.jaxrs.model.Human;
 

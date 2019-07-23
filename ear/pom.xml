@@ -34,6 +34,12 @@
         </dependency>
         <dependency>
             <groupId>MMTR</groupId>
+            <artifactId>dao-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>MMTR</groupId>
             <artifactId>service-api</artifactId>
             <version>1.0-SNAPSHOT</version>
             <type>jar</type>
@@ -73,6 +79,12 @@
                             <groupId>MMTR</groupId>
                             <artifactId>service-api</artifactId>
                             <bundleFileName>jar-service-api.jar</bundleFileName>
+                            <includeInApplicationXml>true</includeInApplicationXml>
+                        </JarModule>
+                        <JarModule>
+                            <groupId>MMTR</groupId>
+                            <artifactId>dao-api</artifactId>
+                            <bundleFileName>jar-dao-api.jar</bundleFileName>
                             <includeInApplicationXml>true</includeInApplicationXml>
                         </JarModule>
                     </modules>

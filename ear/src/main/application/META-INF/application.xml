@@ -16,4 +16,7 @@
   <module>
     <java>jar-service-api.jar</java>
   </module>
+  <module>
+    <java>jar-dao-api.jar</java>
+  </module>
 </application>

@@ -67,24 +67,24 @@
                         <ejbModule>
                             <groupId>MMTR</groupId>
                             <artifactId>service</artifactId>
-                            <bundleFileName>ejb-service.jar</bundleFileName>
+                            <bundleFileName>service.jar</bundleFileName>
                         </ejbModule>
                         <JarModule>
                             <groupId>MMTR</groupId>
                             <artifactId>dao</artifactId>
-                            <bundleFileName>jar-dao.jar</bundleFileName>
+                            <bundleFileName>dao.jar</bundleFileName>
                             <includeInApplicationXml>true</includeInApplicationXml>
                         </JarModule>
                         <JarModule>
                             <groupId>MMTR</groupId>
                             <artifactId>service-api</artifactId>
-                            <bundleFileName>jar-service-api.jar</bundleFileName>
+                            <bundleFileName>service-api.jar</bundleFileName>
                             <includeInApplicationXml>true</includeInApplicationXml>
                         </JarModule>
                         <JarModule>
                             <groupId>MMTR</groupId>
                             <artifactId>dao-api</artifactId>
-                            <bundleFileName>jar-dao-api.jar</bundleFileName>
+                            <bundleFileName>dao-api.jar</bundleFileName>
                             <includeInApplicationXml>true</includeInApplicationXml>
                         </JarModule>
                     </modules>

@@ -8,15 +8,15 @@
     </web>
   </module>
   <module>
-    <ejb>ejb-service.jar</ejb>
+    <ejb>service.jar</ejb>
   </module>
   <module>
-    <java>jar-dao.jar</java>
+    <java>dao.jar</java>
   </module>
   <module>
-    <java>jar-service-api.jar</java>
+    <java>service-api.jar</java>
   </module>
   <module>
-    <java>jar-dao-api.jar</java>
+    <java>dao-api.jar</java>
   </module>
 </application>

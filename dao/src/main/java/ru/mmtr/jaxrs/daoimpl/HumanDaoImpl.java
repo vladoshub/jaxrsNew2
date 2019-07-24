@@ -3,75 +3,39 @@ package ru.mmtr.jaxrs.daoimpl;
 import ru.mmtr.jaxrs.api.HumanDao;
 import ru.mmtr.jaxrs.model.Human;
 
-import javax.ejb.Local;
 import javax.enterprise.context.ApplicationScoped;
-import java.sql.*;
-import java.util.ArrayList;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
 import java.util.List;
+
 @ApplicationScoped
-@Local(HumanDao.class)
 public class HumanDaoImpl implements HumanDao {
 
-    static final String JDBC_DRIVER = "org.h2.Driver";
-    static final String DB_URL = "jdbc:h2:tcp://localhost/~/test";
-    static final String USER = "sa";
-    static final String PASS = "";
-    private Connection conn = null;
-    private Statement stmt = null;
-
-
+    @PersistenceContext(unitName = "Human")
+    private EntityManager em;
     public List<Human> getHumans() {
         try {
-            Class.forName(JDBC_DRIVER);
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            stmt = conn.createStatement();
-            List<Human> humans = new ArrayList<Human>();
-            String sql = "SELECT * FROM HUMAN";
-            ResultSet rs = stmt.executeQuery(sql);
-            while (rs.next()) {
-                humans.add(new Human(rs.getString("NAME"), rs.getInt("AGE"), rs.getInt("GROWTH"), rs.getInt("ID")));
-            }
-            stmt.close();
-            conn.close();
-            return humans;
+            CriteriaBuilder builder = em.getCriteriaBuilder();
+            CriteriaQuery<Human> query = builder.createQuery(Human.class);
+            Root<Human> root = query.from(Human.class);
+            query.select(root);
+            return em.createQuery(query).getResultList();
         } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        } finally {
-            try {
-                if (stmt != null) stmt.close();
-            } catch (SQLException se2) {
-            }
-            try {
-                if (conn != null) conn.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
+          return null;
         }
     }
 
-    public void addHuman(Human human) {
-        try {
-            Class.forName(JDBC_DRIVER);
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            stmt = conn.createStatement();
-            String sql = "INSERT INTO HUMAN " +
-                    "VALUES (NULL,'" + human.getName() + "'," + human.getAge() + "," + human.getGrowth() + ")";
-            stmt.executeUpdate(sql);
-            stmt.close();
-            conn.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
+
+    public void addHuman(Human human){
             try {
-                if (stmt != null) stmt.close();
-            } catch (SQLException se2) {
-            }
-            try {
-                if (conn != null) conn.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
+                em.merge(human);
+
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
-    }
 }

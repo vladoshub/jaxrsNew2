@@ -1,25 +1,30 @@
 package ru.mmtr.jaxrs.model;
 
 public class Human {
+
+    private Long id;
+
     private String name;
-    private int age;
-    private int growth;
-    private int id;
 
-    public Human(){
-    }
-    public Human(String name, int age, int growth, int id){
-        this.name=name;
-        this.age=age;
-        this.growth=growth;
-        this.id=id;
+    private Long age;
+
+    private Long growth;
+
+    public Human() {
     }
 
-    public int getAge() {
+    public Human(String name, Long age, Long growth, Long id) {
+        this.name = name;
+        this.age = age;
+        this.growth = growth;
+        this.id = id;
+    }
+
+    public Long getAge() {
         return age;
     }
 
-    public int getGrowth() {
+    public Long getGrowth() {
         return growth;
     }
 
@@ -27,11 +32,11 @@ public class Human {
         return name;
     }
 
-    public void setAge(int age) {
+    public void setAge(Long age) {
         this.age = age;
     }
 
-    public void setGrowth(int growth) {
+    public void setGrowth(Long growth) {
         this.growth = growth;
     }
 
@@ -39,17 +44,17 @@ public class Human {
         this.name = name;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
     @Override
-    public String toString(){
-        return "Human: "+name+" age:"+age+" growth:"+ growth;
+    public String toString() {
+        return "Human: " + name + " age:" + age + " growth:" + growth;
     }
 
 

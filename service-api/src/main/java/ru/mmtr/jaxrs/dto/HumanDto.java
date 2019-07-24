@@ -7,24 +7,24 @@ import java.io.Serializable;
 public class HumanDto implements Serializable {
 
     private String name;
-    private int age;
-    private int growth;
-    private int id;
+    private Long age;
+    private Long growth;
+    private Long id;
 
     public HumanDto(){
     }
-    public HumanDto(String name,int age,int growth,int id){
+    public HumanDto(String name, Long age, Long growth, Long id){
         this.name=name;
         this.age=age;
         this.growth=growth;
         this.id=id;
     }
 
-    public int getAge() {
+    public Long getAge() {
         return age;
     }
 
-    public int getGrowth() {
+    public Long getGrowth() {
         return growth;
     }
 
@@ -32,11 +32,11 @@ public class HumanDto implements Serializable {
         return name;
     }
 
-    public void setAge(int age) {
+    public void setAge(Long age) {
         this.age = age;
     }
 
-    public void setGrowth(int growth) {
+    public void setGrowth(Long growth) {
         this.growth = growth;
     }
 
@@ -44,11 +44,11 @@ public class HumanDto implements Serializable {
         this.name = name;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 

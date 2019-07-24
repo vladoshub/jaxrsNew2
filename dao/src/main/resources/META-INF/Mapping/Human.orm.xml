@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<entity-mappings xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm http://xmlns.jcp.org/xml/ns/persistence/orm_2_1.xsd"
+                 version="2.1">
+    <entity name="Human" class="ru.mmtr.jaxrs.model.Human" access="FIELD">
+        <table name="HUMAN"/>
+        <attributes>
+
+            <id name="id">
+                <column name="ID" length="20" nullable="false"/>
+                <generated-value strategy="AUTO" generator="SYSTEM_SEQUENCE_BC8EE10F_9B59_429A_B739_FC81BB10055E"/>
+            </id>
+
+            <basic name="name">
+                <column name="NAME" nullable="true"/>
+            </basic>
+
+            <basic name="age">
+                <column name="AGE" nullable="true"/>
+            </basic>
+
+            <basic name="growth">
+                <column name="GROWTH" nullable="true"/>
+            </basic>
+        </attributes>
+    </entity>
+</entity-mappings>

@@ -12,4 +12,6 @@ public interface ServiceApi {
 
     public List<HumanDto> getHumans();
 
+    public List<HumanDto> getHumansByParams(String name,Long age,Long growth);
+
 }

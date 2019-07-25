@@ -41,8 +41,25 @@ public class Controller{
     @Produces(MediaType.APPLICATION_JSON)
     public Response getListHuman(){
         try {
-
             List<HumanDto> humans = serviceApi.getHumans();
+        if (humans.isEmpty())
+            return Response.status(200).entity("List is Empty").build();
+        GenericEntity<List<HumanDto>> genericEntity = new GenericEntity<List<HumanDto>>(humans){};
+        return Response.status(200).entity(genericEntity).build();
+
+    }
+        catch (Exception e){
+        return Response.status(200).entity("error").build();
+    }
+    }
+
+
+    @GET
+    @Path("/nag/{name}/{age}/{growth}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response findByParams(@PathParam("name") String name, @PathParam("age") Long age,@PathParam("growth") Long growth){
+        try {
+            List<HumanDto> humans = serviceApi.getHumansByParams(name,age,growth);
             if (humans.isEmpty())
                 return Response.status(200).entity("List is Empty").build();
             GenericEntity<List<HumanDto>> genericEntity = new GenericEntity<List<HumanDto>>(humans){};
@@ -53,7 +70,6 @@ public class Controller{
             return Response.status(200).entity("error").build();
         }
     }
-
     @GET
     @Path("/test")
     @Produces(MediaType.APPLICATION_JSON)

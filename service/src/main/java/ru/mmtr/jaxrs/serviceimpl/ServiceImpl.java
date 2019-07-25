@@ -24,4 +24,8 @@ public class ServiceImpl implements ServiceApi {
         humanDao.addHuman(HumanConverter.convertToHuman(humanDto));
     }
 
+    @Override
+    public List<HumanDto> getHumansByParams(String name,Long age,Long growth) {
+        return HumanConverter.convertToHumanDtoList(humanDao.getHumansByParams(name,age,growth));
+    }
 }

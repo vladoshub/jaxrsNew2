@@ -32,10 +32,33 @@ public class HumanDaoImpl implements HumanDao {
 
     public void addHuman(Human human){
             try {
-                em.merge(human);
+                if(human.getId()==null) {
+                    em.persist(human);
+                }
+                else {
+                    em.merge(human);
+                }
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+
+    @Override
+    public List<Human> getHumansByParams(String name, Long age, Long growth) {
+        try {
+            CriteriaBuilder builder = em.getCriteriaBuilder();
+            CriteriaQuery<Human> query = builder.createQuery(Human.class);
+            Root<Human> root = query.from(Human.class);
+            query.select(root)
+                    .where(
+                            builder.like(root.<String>get("name"),name.substring(0,1)+"%"),
+                             builder.equal(root.<Long>get("age"),age),
+                            builder.equal(root.<Long>get("growth"),growth)
+                    );
+            return em.createQuery(query).getResultList();
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }

@@ -15,6 +15,7 @@
         <module>ear</module>
         <module>web</module>
         <module>dao-api</module>
+        <module>searchcriteria</module>
     </modules>
 
     <properties>

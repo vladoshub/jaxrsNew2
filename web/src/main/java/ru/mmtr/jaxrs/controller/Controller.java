@@ -1,6 +1,8 @@
 package ru.mmtr.jaxrs.controller;
 
+import com.sun.jndi.toolkit.dir.SearchFilter;
 import ru.mmtr.jaxrs.dto.HumanDto;
+import ru.mmtr.jaxrs.searchcriteria.SearchCriteria;
 import ru.mmtr.jaxrs.service.ServiceApi;
 
 import javax.ejb.EJB;
@@ -55,11 +57,17 @@ public class Controller{
 
 
     @GET
-    @Path("/nag/{name}/{age}/{growth}")
+    @Path("/param")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response findByParams(@PathParam("name") String name, @PathParam("age") Long age,@PathParam("growth") Long growth){
+    public Response findByParams(
+            @QueryParam("name") String name,
+            @QueryParam("age") Long age,
+            @QueryParam("growth") Long growth) {
         try {
-            List<HumanDto> humans = serviceApi.getHumansByParams(name,age,growth);
+            SearchCriteria searchCriteria = new SearchCriteria(name,age,growth);
+            if(searchCriteria.isNull())
+                return Response.status(200).entity("All params is Null").build();
+                List<HumanDto> humans = serviceApi.getHumansByParams(searchCriteria);
             if (humans.isEmpty())
                 return Response.status(200).entity("List is Empty").build();
             GenericEntity<List<HumanDto>> genericEntity = new GenericEntity<List<HumanDto>>(humans){};
@@ -70,6 +78,7 @@ public class Controller{
             return Response.status(200).entity("error").build();
         }
     }
+
     @GET
     @Path("/test")
     @Produces(MediaType.APPLICATION_JSON)

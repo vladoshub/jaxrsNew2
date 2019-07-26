@@ -10,6 +10,7 @@
         <module name="daoapi" />
         <module name="web" />
         <module name="dao" />
+        <module name="searchcriteria" />
         <module name="service" />
         <module name="ear" />
       </profile>

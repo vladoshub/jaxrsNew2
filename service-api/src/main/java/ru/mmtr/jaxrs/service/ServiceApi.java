@@ -1,6 +1,8 @@
 package ru.mmtr.jaxrs.service;
 
+import com.sun.jndi.toolkit.dir.SearchFilter;
 import ru.mmtr.jaxrs.dto.HumanDto;
+import ru.mmtr.jaxrs.searchcriteria.SearchCriteria;
 
 import javax.ejb.Local;
 import java.util.List;
@@ -12,6 +14,6 @@ public interface ServiceApi {
 
     public List<HumanDto> getHumans();
 
-    public List<HumanDto> getHumansByParams(String name,Long age,Long growth);
+    public List<HumanDto> getHumansByParams(SearchCriteria searchCriteria);
 
 }

@@ -19,4 +19,7 @@
   <module>
     <java>dao-api.jar</java>
   </module>
+  <module>
+    <java>searchcriteria.jar</java>
+  </module>
 </application>

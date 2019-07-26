@@ -4,6 +4,7 @@ package ru.mmtr.jaxrs.serviceimpl;
 import ru.mmtr.jaxrs.api.HumanDao;
 import ru.mmtr.jaxrs.converter.HumanConverter;
 import ru.mmtr.jaxrs.dto.HumanDto;
+import ru.mmtr.jaxrs.searchcriteria.SearchCriteria;
 import ru.mmtr.jaxrs.service.ServiceApi;
 
 import javax.ejb.Stateless;
@@ -25,7 +26,7 @@ public class ServiceImpl implements ServiceApi {
     }
 
     @Override
-    public List<HumanDto> getHumansByParams(String name,Long age,Long growth) {
-        return HumanConverter.convertToHumanDtoList(humanDao.getHumansByParams(name,age,growth));
+    public List<HumanDto> getHumansByParams(SearchCriteria searchCriteria) {
+       return HumanConverter.convertToHumanDtoList(humanDao.getHumansByParams(searchCriteria));
     }
 }

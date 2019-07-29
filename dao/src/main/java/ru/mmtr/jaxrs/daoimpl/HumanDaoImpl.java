@@ -61,27 +61,18 @@ public class HumanDaoImpl implements HumanDao {
     }
 
     public Predicate getPredicate(SearchCriteria searchCriteria,CriteriaBuilder builder,CriteriaQuery query, Root<Human> root){
-        List<Predicate> predicateList = new ArrayList<Predicate>();
+        Predicate where = builder.conjunction();
         if(searchCriteria.getName()!=null) {
-            Predicate predicateForName = builder.like(root.<String>get("name"), searchCriteria.getName().substring(0, 1) + "%");
-            predicateList.add(predicateForName);
+            where = builder.and(where,builder.like(root.<String>get("name"), searchCriteria.getName() + "%"));
         }
         if(searchCriteria.getAge()!=null) {
-            Predicate predicateForAge =builder.equal(root.<Long>get("age"),searchCriteria.getAge());
-            predicateList.add(predicateForAge);
+            where = builder.and(where,builder.equal(root.<Long>get("age"),searchCriteria.getAge()));
         }
         if(searchCriteria.getGrowth()!=null) {
-            Predicate predicateForGrowth = builder.equal(root.<Long>get("growth"),searchCriteria.getGrowth());
-            predicateList.add(predicateForGrowth);
+            where = builder.and(where
+                    ,builder.equal(root.<Long>get("growth"),searchCriteria.getGrowth()));
         }
-        Predicate[] predicates = new Predicate[predicateList.size()];
-        int countPred=0;
-        for (Predicate predicate : predicateList) {
-            predicates[countPred]=predicate;
-            countPred++;
-        }
-
-        return  builder.and(predicates);
+        return  where;
 
     }
 

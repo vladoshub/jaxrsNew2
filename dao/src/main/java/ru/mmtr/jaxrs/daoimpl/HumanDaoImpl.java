@@ -50,18 +50,18 @@ public class HumanDaoImpl implements HumanDao {
     @Override
     public List<Human> getHumansByParams(SearchCriteria searchCriteria) {
         try {
-            return getPredicate(searchCriteria);
+            CriteriaBuilder builder = em.getCriteriaBuilder();
+            CriteriaQuery<Human> query = builder.createQuery(Human.class);
+            Root<Human> root = query.from(Human.class);
+            query.select(root).where(getPredicate(searchCriteria,builder,query,root));
+            return em.createQuery(query).getResultList();
         } catch (Exception e) {
             return null;
         }
     }
 
-    @Override
-    public List<Human> getPredicate(SearchCriteria searchCriteria) {
+    public Predicate getPredicate(SearchCriteria searchCriteria,CriteriaBuilder builder,CriteriaQuery query, Root<Human> root){
         List<Predicate> predicateList = new ArrayList<Predicate>();
-        CriteriaBuilder builder = em.getCriteriaBuilder();
-        CriteriaQuery<Human> query = builder.createQuery(Human.class);
-        Root<Human> root = query.from(Human.class);
         if(searchCriteria.getName()!=null) {
             Predicate predicateForName = builder.like(root.<String>get("name"), searchCriteria.getName().substring(0, 1) + "%");
             predicateList.add(predicateForName);
@@ -74,15 +74,18 @@ public class HumanDaoImpl implements HumanDao {
             Predicate predicateForGrowth = builder.equal(root.<Long>get("growth"),searchCriteria.getGrowth());
             predicateList.add(predicateForGrowth);
         }
-      Predicate[] predicates = new Predicate[predicateList.size()];
+        Predicate[] predicates = new Predicate[predicateList.size()];
         int countPred=0;
         for (Predicate predicate : predicateList) {
             predicates[countPred]=predicate;
             countPred++;
         }
 
-        Predicate finalPredicate = builder.and(predicates);
-        query.select(root).where(finalPredicate);
-         return em.createQuery(query).getResultList();
+        return  builder.and(predicates);
+
     }
+
+
+
+
 }
